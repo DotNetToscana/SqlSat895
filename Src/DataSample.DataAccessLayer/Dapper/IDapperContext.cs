@@ -26,9 +26,9 @@ namespace DataSample.DataAccessLayer.Dapper
 
         Task<T> GetSingleValueAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null);
 
-        Task<T> InsertAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null) where T : class;
-
         Task InsertAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null);
+
+        Task<int> InsertWithIdentityAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null);
 
         Task UpdateAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null);
 

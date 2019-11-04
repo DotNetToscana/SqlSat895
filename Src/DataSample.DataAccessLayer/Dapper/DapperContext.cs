@@ -71,11 +71,11 @@ namespace DataSample.DataAccessLayer.Dapper
             return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
         }
 
-        public Task<T> InsertAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null) where T : class
+        public Task<int> InsertWithIdentityAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
             // Adds the SQL query to get the Id of the last inserted record.
             sql += "; SELECT CAST(SCOPE_IDENTITY() AS INT); ";
-            return Connection.QuerySingleAsync<T>(sql, param, transaction, commandType: commandType);
+            return Connection.QuerySingleAsync<int>(sql, param, transaction, commandType: commandType);
         }
 
         public Task UpdateAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
