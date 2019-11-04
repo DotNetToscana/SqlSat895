@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataSample.DataAccessLayer.EntityFramework
@@ -17,5 +15,8 @@ namespace DataSample.DataAccessLayer.EntityFramework
         void Delete<T>(T entity) where T : class;
 
         Task SaveAsync();
+
+        // Avvia una transazione.
+        Task<IDbContextTransaction> BeginTransactionAsync();
     }
 }

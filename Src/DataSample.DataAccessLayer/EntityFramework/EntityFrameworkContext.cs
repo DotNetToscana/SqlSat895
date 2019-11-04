@@ -1,9 +1,7 @@
 ﻿using DataSample.DataAccessLayer.EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataSample.DataAccessLayer.EntityFramework
@@ -54,6 +52,14 @@ namespace DataSample.DataAccessLayer.EntityFramework
             Set<T>().Remove(entity);
         }
 
-        public Task SaveAsync() => SaveChangesAsync();
+        public Task SaveAsync()
+        {
+            return SaveChangesAsync();
+        }
+
+        public Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return Database.BeginTransactionAsync();
+        }
     }
 }

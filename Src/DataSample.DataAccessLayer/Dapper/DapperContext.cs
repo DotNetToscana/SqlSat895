@@ -29,68 +29,68 @@ namespace DataSample.DataAccessLayer.Dapper
             connection = new SqlConnection(connectionString);
         }
 
-        public Task<IEnumerable<T>> GetDataAsync<T>(string sql, object param = null, CommandType? commandType = null) where T : class
+        public Task<IEnumerable<T>> GetDataAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null) where T : class
         {
-            return Connection.QueryAsync<T>(sql, param, commandType: commandType);
+            return Connection.QueryAsync<T>(sql, param, transaction, commandType: commandType);
         }
 
-        public Task<IEnumerable<TReturn>> GetDataAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "Id", CommandType? commandType = null) where TReturn : class
+        public Task<IEnumerable<TReturn>> GetDataAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "Id", IDbTransaction transaction = null, CommandType? commandType = null) where TReturn : class
         {
-            return Connection.QueryAsync(sql, map, param, splitOn: splitOn, commandType: commandType);
+            return Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
         }
 
-        public Task<IEnumerable<TReturn>> GetDataAsync<TFirst, TSecond, TThird, TReturn>(string sql, Func<TFirst, TSecond, TThird, TReturn> map, object param = null, string splitOn = "Id", CommandType? commandType = null) where TReturn : class
+        public Task<IEnumerable<TReturn>> GetDataAsync<TFirst, TSecond, TThird, TReturn>(string sql, Func<TFirst, TSecond, TThird, TReturn> map, object param = null, string splitOn = "Id", IDbTransaction transaction = null, CommandType? commandType = null) where TReturn : class
         {
-            return Connection.QueryAsync(sql, map, param, splitOn: splitOn, commandType: commandType);
+            return Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
         }
 
-        public Task<T> GetObjectAsync<T>(string sql, object param = null, CommandType? commandType = null) where T : class
+        public Task<T> GetObjectAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null) where T : class
         {
-            return Connection.QueryFirstOrDefaultAsync<T>(sql, param, commandType: commandType);
+            return Connection.QueryFirstOrDefaultAsync<T>(sql, param, transaction, commandType: commandType);
         }
 
-        public async Task<TReturn> GetObjectAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "Id", CommandType? commandType = null) where TReturn : class
+        public async Task<TReturn> GetObjectAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "Id", IDbTransaction transaction = null, CommandType? commandType = null) where TReturn : class
         {
-            var result = await Connection.QueryAsync(sql, map, param, splitOn: splitOn, commandType: commandType);
+            var result = await Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
             return result.FirstOrDefault();
         }
 
-        public async Task<TReturn> GetObjectAsync<TFirst, TSecond, TThird, TReturn>(string sql, Func<TFirst, TSecond, TThird, TReturn> map, object param = null, string splitOn = "Id", CommandType? commandType = null) where TReturn : class
+        public async Task<TReturn> GetObjectAsync<TFirst, TSecond, TThird, TReturn>(string sql, Func<TFirst, TSecond, TThird, TReturn> map, object param = null, string splitOn = "Id", IDbTransaction transaction = null, CommandType? commandType = null) where TReturn : class
         {
-            var result = await Connection.QueryAsync(sql, map, param, splitOn: splitOn, commandType: commandType);
+            var result = await Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
             return result.FirstOrDefault();
         }
 
-        public Task<T> GetSingleValueAsync<T>(string sql, object param = null, CommandType? commandType = null)
+        public Task<T> GetSingleValueAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
-            return Connection.ExecuteScalarAsync<T>(sql, param, commandType: commandType);
+            return Connection.ExecuteScalarAsync<T>(sql, param, transaction, commandType: commandType);
         }
 
-        public Task InsertAsync(string sql, object param = null, CommandType? commandType = null)
+        public Task InsertAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
-            return Connection.ExecuteAsync(sql, param, commandType: commandType);
+            return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
         }
 
-        public Task<T> InsertAsync<T>(string sql, object param = null, CommandType? commandType = null) where T : class
+        public Task<T> InsertAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null) where T : class
         {
             // Adds the SQL query to get the Id of the last inserted record.
             sql += "; SELECT CAST(SCOPE_IDENTITY() AS INT); ";
-            return Connection.QuerySingleAsync<T>(sql, param, commandType: commandType);
+            return Connection.QuerySingleAsync<T>(sql, param, transaction, commandType: commandType);
         }
 
-        public Task UpdateAsync(string sql, object param = null, CommandType? commandType = null)
+        public Task UpdateAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
-            return Connection.ExecuteAsync(sql, param, commandType: commandType);
+            return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
         }
 
-        public Task DeleteAsync(string sql, object param = null, CommandType? commandType = null)
+        public Task DeleteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
-            return Connection.ExecuteAsync(sql, param, commandType: commandType);
+            return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
         }
 
-        public Task ExecuteAsync(string sql, object param = null, CommandType? commandType = null)
+        public Task ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         {
-            return Connection.ExecuteAsync(sql, param, commandType: commandType);
+            return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
         }
 
         public IDbTransaction BeginTransaction()

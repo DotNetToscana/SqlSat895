@@ -65,8 +65,8 @@ namespace DataSample.Client
                 })
                 .AddSingleton<IDapperContext, DapperContext>((_) => new DapperContext(connectionString));
 
-            //services.AddSingleton<IProductsService, EntityFrameworkProductsService>();
-            services.AddSingleton<IProductsService, DapperProductsService>();
+            services.AddSingleton<IProductsService, EntityFrameworkProductsService>();
+            //services.AddSingleton<IProductsService, DapperProductsService>();
             //services.AddSingleton<IProductsService, RemoteProductsService>();
 
             services.AddTransient(typeof(MainWindow));
