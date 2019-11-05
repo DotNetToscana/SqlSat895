@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataSample.DataAccessLayer.Dapper
 {
-    public class DapperContext : IDapperContext, IDisposable
+    public class DapperContext : IDapperContext
     {
         private IDbConnection connection;
         private IDbConnection Connection

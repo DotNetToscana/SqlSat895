@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataSample.Common.Models
+﻿namespace DataSample.Common.Models
 {
     public class Product
     {
