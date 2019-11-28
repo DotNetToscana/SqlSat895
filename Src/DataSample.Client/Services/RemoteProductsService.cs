@@ -11,7 +11,7 @@ namespace DataSample.Client.Services
 {
     public class RemoteProductsService : IProductsService
     {
-        private const string BASE_URL = "https://localhost:44343/api/";
+        private const string BASE_URL = "https://localhost:44301/api/";
         private readonly HttpClient client;
         private readonly JsonSerializerOptions jsonSerializerOptions;
 
